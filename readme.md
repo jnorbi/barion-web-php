@@ -1,7 +1,12 @@
-﻿# BarionPHP
+﻿
+# BarionPHP
+
+[![Latest Stable Version](http://poser.pugx.org/bencurio/barion-web-php/v)](https://packagist.org/packages/bencurio/barion-web-php) [![Total Downloads](http://poser.pugx.org/bencurio/barion-web-php/downloads)](https://packagist.org/packages/bencurio/barion-web-php) [![Latest Unstable Version](http://poser.pugx.org/bencurio/barion-web-php/v/unstable)](https://packagist.org/packages/bencurio/barion-web-php) [![License](http://poser.pugx.org/bencurio/barion-web-php/license)](https://packagist.org/packages/bencurio/barion-web-php) [![Dependents](http://poser.pugx.org/bencurio/barion-web-php/dependents)](https://packagist.org/packages/bencurio/barion-web-php)
 
 **BarionPHP** is a compact PHP library to manage online e-money and card payments via the *Barion Smart Gateway*.
 It allows you to accept credit card and e-money payments in just a few lines of code.
+
+<p align="center"><hr><strong>⚠⚠⚠ Breaking changes: ⚠⚠⚠</strong><hr><ul><li>Drop PHP 5.x support, minimum version PHP 7.4</li><li>Namespaces added</li><li>All enumeration and define changed: <code><a href="https://github.com/bencurio/barion-web-php/tree/master/library/Enum">library/Enum</a></code>. If you have built your code on the official version, you will need to update your integration to the appropriate namespaces.</li></ul>This fork was made to support Composer and PSR-4 (autoload). Therefore, those using the original Barion library will not be able to update without breaking, as this codebase uses namespaces and includes minor fixes. I'll try to keep track of changes to the upstream repository.<hr></p>
 
 **BarionPHP** lets you
 * Start an online immediate or reservation payment easily
@@ -12,43 +17,41 @@ It allows you to accept credit card and e-money payments in just a few lines of 
 All with just a few simple pieces of code!
 
 # Version history
-* **1.4.4** February 17. 2021
-* **1.4.3** December 11. 2020
-* **1.4.2** August 15. 2019.
-* **1.4.1** August 14. 2019.
-* **1.4.0** August 08. 2019.
-* **1.3.2** August 05. 2019.
-* **1.3.1** March 20. 2019.
-* **1.3.0** March 12. 2019.
-* **1.2.9** May 16. 2017.
-* **1.2.8** April 13. 2017.
-* **1.2.7** February 14.  2017.
-* **1.2.5** November 07.  2016.
-* **1.2.4** May 25.  2016.
-* **1.2.3** January 14.  2016.
-* **1.2.2** January 11.  2016.
-* **1.1.0** November 27. 2015.
-* **1.0.1** November 26. 2015.
-* **1.0.0** November 17. 2015.
 
-For details about version changes, please refer to the **changelog.txt** file.
+<p align="center"><hr><strong>⚠⚠⚠ Different versioning from the official Barion library: ⚠⚠⚠</strong><hr>The table below shows the current version and which Barion library version it covers.<hr></p>
+
+| Version                        | Covers                            |
+|--------------------------------|-----------------------------------|
+ | [**1.0.0** (March 18. 2023)](https://github.com/bencurio/barion-web-php/blob/master/changelog.md#v100-2023-03-19) | [**1.4.10** (January 17. 2021)](https://github.com/barion/barion-web-php/releases/tag/v1.4.10) | 
+
+For details about version changes, please refer to the **[changelog.md](https://github.com/bencurio/barion-web-php/blob/master/changelog.md)** file.
+
+# Todo
+
+- [x] Composer support
+- [x] PSR-4
+- [ ] E2E tests (WIP)
+- [ ] Tests (WIP)
 
 # System requirements
 
-* PHP 5.6 or higher
-* cURL module enabled (at least v7.18.1)
+* PHP 7.4 or higher
+* cURL PHP extension (at least v7.18.1)
+* JSON PHP extension
 * SSL enabled (systems using OpenSSL with the version of 0.9.8f at least)
 
 # Installation
 
-Copy the contents of the **barion** library into the desired folder. Be sure to have access to the path when running your PHP script.
+```shell
+$ composer require bencurio/barion-web-php
+```
 
 # Basic usage
 
-Include the **BarionClient** class in your PHP script:
+Include the composer autoloader in your PHP script:
 
 ```php
-require_once 'library/BarionClient.php';
+require_once __DIR__ . '/vendor/autoload.php';
 ```
 
 Then instantiate a Barion client. To achieve this, you must supply three parameters.
@@ -69,15 +72,17 @@ The environment to connect to. This can be the test system, or the production en
 
 ```php
 // Test environment
-$environment = BarionEnvironment::Test;
+$environment = \Bencurio\Barion\Enum\BarionEnvironment::Test;
 
 // Production environment
-$environment = BarionEnvironment::Prod;
+$environment = \Bencurio\Barion\Enum\BarionEnvironment::Prod;
 ```
 
 With these parameters you can create an instance of the **BarionClient** class:
 
 ```php
+use \Bencurio\Barion\BarionClient;
+
 $BC = new BarionClient($myPosKey, $apiVersion, $environment);
 ```
 
@@ -97,6 +102,8 @@ To start an online payment, you have to create one or more **Payment Transaction
 First, create an **ItemModel**:
 
 ```php
+use Bencurio\Barion\Models\Common\ItemModel;
+
 $item = new ItemModel();
 $item->Name = "TestItem";
 $item->Description = "A test product";
@@ -110,6 +117,8 @@ $item->SKU = "ITEM-01";
 Then create a **PaymentTransactionModel** and add the **Item** mentioned above to it:
 
 ```php
+use Bencurio\Barion\Models\Payment\PaymentTransactionModel;
+
 $trans = new PaymentTransactionModel();
 $trans->POSTransactionId = "TRANS-01";
 $trans->Payee = "webshop@example.com";
@@ -122,6 +131,8 @@ $trans->AddItem($item);
 Finally, create a **PreparePaymentRequestModel** and add the **PaymentTransactionModel** mentioned above to it:
 
 ```php
+use Bencurio\Barion\Models\Payment\PreparePaymentRequestModel;
+
 $ppr = new PreparePaymentRequestModel();
 $ppr->GuestCheckout = true;
 $ppr->PaymentType = PaymentType::Immediate;

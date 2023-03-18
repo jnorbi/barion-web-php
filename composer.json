@@ -1,8 +1,36 @@
 {
-    "name": "barion/barion-web-php",
-    "description": "PHP libary for Barion Smart Gateway API integration",
+    "name": "bencurio/barion-web-php",
+    "type": "library",
+    "description": "Unofficial PHP libary for Barion Payment Gateway",
+    "keywords": [
+        "barion",
+        "payment",
+        "gateway"
+    ],
+    "homepage": "https://github.com/bencurio/barion-web-php",
+    "authors": [
+        {
+            "name": "Bence Santha",
+            "homepage": "https://github.com/bencurio/barion-web-php"
+        },
+        {
+            "name": "Barion and contributors",
+            "homepage": "https://github.com/barion/barion-web-php"
+        }
+    ],
     "require": {
-        "php": ">=7.3",
-        "ext-curl": "*"
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10"
+    },
+    "license": "Apache-2.0",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Bencurio\\Barion\\": "library/"
+        }
     }
 }
