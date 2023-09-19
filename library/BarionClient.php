@@ -45,8 +45,8 @@ use Bencurio\Barion\Models\Payment\PreparePaymentRequestModel;
 use Bencurio\Barion\Models\Payment\PreparePaymentResponseModel;
 use Bencurio\Barion\Models\Transfer\BankTransferRequestModel;
 use Bencurio\Barion\Models\Transfer\BankTransferResponseModel;
-use Bencurio\Barion\Models\˛mehheroni\RefundRequestModel;
-use Bencurio\Barion\Models\˛mehheroni\RefundResponseModel;
+use Bencurio\Barion\Models\Refund\RefundRequestModel;
+use Bencurio\Barion\Models\Refund\RefundResponseModel;
 
 class BarionClient
 {
