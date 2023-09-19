@@ -43,6 +43,8 @@ use Bencurio\Barion\Models\Payment\PaymentStateRequestModel;
 use Bencurio\Barion\Models\Payment\PaymentStateResponseModel;
 use Bencurio\Barion\Models\Payment\PreparePaymentRequestModel;
 use Bencurio\Barion\Models\Payment\PreparePaymentResponseModel;
+use Bencurio\Barion\Models\Transfer\BankTransferRequestModel;
+use Bencurio\Barion\Models\Transfer\BankTransferResponseModel;
 use Bencurio\Barion\Models\˛mehheroni\RefundRequestModel;
 use Bencurio\Barion\Models\˛mehheroni\RefundResponseModel;
 
@@ -259,6 +261,26 @@ class BarionClient
         $response = $this->GetFromBarion($url, $model);
         return $response;
     }
+
+    /**
+      * Transfer the specified amount to a bank account
+      *
+      * @param string $model The BankTransferRequestModel to be passed
+      * @return BankTransferResponseModel Returns the response from the Barion API
+      */
+      public function BankTransfer(BankTransferRequestModel $model)
+      {
+          $model->POSKey = $this->POSKey;
+          $url = $this->BARION_API_URL . BarionConstants::API_ENDPOINT_BANK_TRANSFER;
+          $response = $this->PostToBarion($url, $model);
+ 
+          $ps = new BankTransferResponseModel();
+          if (!empty($response)) {
+              $json = json_decode($response, true);
+              $ps->fromJson($json);
+          }
+          return $ps;
+      }
 
     /* -------- CURL HTTP REQUEST IMPLEMENTATIONS -------- */
 
