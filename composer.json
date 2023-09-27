@@ -1,5 +1,5 @@
 {
-    "name": "holloandris/barion-web-php",
+    "name": "Webness-Studio/barion-web-php",
     "type": "library",
     "description": "Unofficial PHP libary for Barion Payment Gateway",
     "keywords": [
@@ -7,11 +7,11 @@
         "payment",
         "gateway"
     ],
-    "homepage": "https://github.com/holloandris/barion-web-php",
+    "homepage": "https://github.com/Webness-Studio/barion-web-php",
     "authors": [
         {
             "name": "Andras Hollo",
-            "homepage": "https://github.com/holloandris/barion-web-php"
+            "homepage": "https://github.com/Webness-Studio/barion-web-php"
         },
         {
             "name": "Bence Santha",
