@@ -1,5 +1,5 @@
 {
-    "name": "Webness-Studio/barion-web-php",
+    "name": "webness-studio/barion-web-php",
     "type": "library",
     "description": "Unofficial PHP libary for Barion Payment Gateway",
     "keywords": [
