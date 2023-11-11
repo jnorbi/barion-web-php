@@ -52,9 +52,9 @@ class BarionClient
 {
     private $Environment;
 
-    private $Password;
     private $APIVersion;
     private $POSKey;
+    private $APIKey;
 
     private $BARION_API_URL = "";
     private $BARION_WEB_URL = "";
@@ -69,10 +69,11 @@ class BarionClient
      * @param string $env The environment to connect to
      * @param bool $useBundledRootCerts Set this to true if you're having problem with SSL connection
      */
-    function __construct($poskey, $version = 2, $env = BarionEnvironment::Prod, $useBundledRootCerts = false)
+    function __construct($poskey, $apikey, $version = 2, $env = BarionEnvironment::Prod, $useBundledRootCerts = false)
     {
 
         $this->POSKey = $poskey;
+        $this->APIKey = $apikey;
         $this->APIVersion = $version;
         $this->Environment = $env;
 
@@ -310,7 +311,7 @@ class BarionClient
         \curl_setopt($ch, CURLOPT_POST, 1);
         \curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "User-Agent: $userAgent"));
+        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "User-Agent: $userAgent", "x-api-key: $this->APIKey"));
         
         if(\substr(\phpversion(), 0, 3) < 5.6) {
             \curl_setopt($ch, CURLOPT_SSLVERSION, 6);
@@ -363,7 +364,7 @@ class BarionClient
 
         \curl_setopt($ch, CURLOPT_URL, $fullUrl);
         \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("User-Agent: $userAgent"));
+        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("User-Agent: $userAgent", "x-api-key: $this->APIKey"));
         
         if(\substr(\phpversion(), 0, 3) < 5.6) {
             \curl_setopt($ch, CURLOPT_SSLVERSION, 6);
