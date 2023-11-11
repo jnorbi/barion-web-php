@@ -22,13 +22,14 @@ use Bencurio\Barion\Helpers\iBarionModel;
 use Bencurio\Barion\Helpers\BarionHelper;
 use Bencurio\Barion\Models\BaseResponseModel;
 use Bencurio\Barion\Models\Common\BankAccountModel;
+use Bencurio\Barion\Models\Common\RecipientModel;
 
 class BankTransferResponseModel extends BaseResponseModel implements iBarionModel
 {
     public $TransactionId;
     public $Currency;
     public $Amount;
-    public $RecipientName;
+    public $Recipient;
     public $Comment;
     public $BankAccount;
 
@@ -38,7 +39,7 @@ class BankTransferResponseModel extends BaseResponseModel implements iBarionMode
         $this->TransactionId = "";
         $this->Currency = "EUR";
         $this->Amount = 0;
-        $this->RecipientName = "";
+        $this->Recipient = "";
         $this->Comment = "";
         $this->BankAccount = new BankAccountModel();
     }
@@ -50,7 +51,8 @@ class BankTransferResponseModel extends BaseResponseModel implements iBarionMode
             $this->TransactionId = BarionHelper::jget($json, 'TransactionId');
             $this->Currency = BarionHelper::jget($json, 'Currency');
             $this->Amount = BarionHelper::jget($json, 'Amount');
-            $this->RecipientName = BarionHelper::jget($json, 'RecipientName');
+            $this->Recipient = new RecipientModel();
+            $this->Recipient->fromJson(BarionHelper::jget($json, 'Recipient'));
             $this->Comment = BarionHelper::jget($json, 'Comment');
             $this->BankAccount = new BankAccountModel();
             $this->BankAccount->fromJson(BarionHelper::jget($json, 'BankAccount'));

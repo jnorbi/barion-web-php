@@ -24,8 +24,6 @@ use Bencurio\Barion\Models\Common\RecipientModel;
 
 class BankTransferRequestModel extends BaseRequestModel
 {
-    public $UserName;
-    public $Password;
     public $Currency;
     public $Amount;
     public $Recipient;
@@ -34,8 +32,6 @@ class BankTransferRequestModel extends BaseRequestModel
 
     function __construct()
     {
-        $this->UserName = "";
-        $this->Password = "";
         $this->Currency = "";
         $this->Amount = 0;
         $this->Recipient = new RecipientModel();
