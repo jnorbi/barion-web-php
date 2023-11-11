@@ -20,6 +20,7 @@ namespace Bencurio\Barion\Models\Transfer;
 
 use Bencurio\Barion\Models\BaseRequestModel;
 use Bencurio\Barion\Models\Common\BankAccountModel;
+use Bencurio\Barion\Models\Common\RecipientModel;
 
 class BankTransferRequestModel extends BaseRequestModel
 {
@@ -27,7 +28,7 @@ class BankTransferRequestModel extends BaseRequestModel
     public $Password;
     public $Currency;
     public $Amount;
-    public $RecipientName;
+    public $Recipient;
     public $Comment;
     public $BankAccount;
 
@@ -37,7 +38,7 @@ class BankTransferRequestModel extends BaseRequestModel
         $this->Password = "";
         $this->Currency = "";
         $this->Amount = 0;
-        $this->RecipientName = "";
+        $this->Recipient = new RecipientModel();
         $this->Comment = "";
         $this->BankAccount = new BankAccountModel();
     }
