@@ -364,7 +364,7 @@ class BarionClient
 
         \curl_setopt($ch, CURLOPT_URL, $fullUrl);
         \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("User-Agent: $userAgent", "x-api-key: $this->APIKey"));
+        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("User-Agent: $userAgent"));
         
         if(\substr(\phpversion(), 0, 3) < 5.6) {
             \curl_setopt($ch, CURLOPT_SSLVERSION, 6);
