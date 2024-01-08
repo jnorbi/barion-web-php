@@ -311,7 +311,7 @@ class BarionClient
         \curl_setopt($ch, CURLOPT_POST, 1);
         \curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "User-Agent: $userAgent", "x-api-key: $this->APIKey"));
+        \curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "User-Agent: $userAgent"));
         
         if(\substr(\phpversion(), 0, 3) < 5.6) {
             \curl_setopt($ch, CURLOPT_SSLVERSION, 6);
