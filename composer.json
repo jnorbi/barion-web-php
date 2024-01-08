@@ -1,5 +1,5 @@
 {
-    "name": "webness-studio/barion-web-php",
+    "name": "jnorbi/barion-web-php",
     "type": "library",
     "description": "Unofficial PHP libary for Barion Payment Gateway",
     "keywords": [
@@ -9,6 +9,10 @@
     ],
     "homepage": "https://github.com/Webness-Studio/barion-web-php",
     "authors": [
+        {
+            "name": "Norbert Jarja",
+            "homepage": "https://github.com/jnorbi/barion-web-php"
+        }
         {
             "name": "Andras Hollo",
             "homepage": "https://github.com/Webness-Studio/barion-web-php"
